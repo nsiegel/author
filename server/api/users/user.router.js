@@ -59,7 +59,6 @@ router.delete('/:id', function (req, res, next) {
 	.then(null, next);
 });
 
-<<<<<<< HEAD
 router.post('/login', function(req, res, next) {
   User.findOne(req.body)
     .then(function(user) {
@@ -69,16 +68,20 @@ router.post('/login', function(req, res, next) {
     .then(null, next);
 });
 
-router.post('/signup', function(req, res, next) {
-  User.findOne(req.body)
+router.post('/signup/entry', function(req, res, next) {
+  console.log('hi: ' + req.body);
+  User.findOne({email: req.body.email})
     .then(function(user) {
-      console.log(user);
-      res.status(201).json(user);
+      if (user) {
+        res.send('This email is already in use!');
+      }
+      else if (user.email && user.password) {
+        var newUser = req.body;
+        User.create(newUser);
+        res.status(201).json(newUser);
+      }
     })
     .then(null, next);
 });
 
 module.exports = router;
-=======
-module.exports = router;
->>>>>>> master
