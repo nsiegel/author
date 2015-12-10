@@ -59,6 +59,7 @@ router.delete('/:id', function (req, res, next) {
 	.then(null, next);
 });
 
+<<<<<<< HEAD
 router.post('/login', function(req, res, next) {
   User.findOne(req.body)
     .then(function(user) {
@@ -78,3 +79,6 @@ router.post('/signup', function(req, res, next) {
 });
 
 module.exports = router;
+=======
+module.exports = router;
+>>>>>>> master
