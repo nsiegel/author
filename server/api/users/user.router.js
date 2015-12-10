@@ -60,25 +60,29 @@ router.delete('/:id', function (req, res, next) {
 });
 
 router.post('/login', function(req, res, next) {
+	console.log(req.body);
   User.findOne(req.body)
     .then(function(user) {
-      console.log(user);
+    	console.log(user);
+      req.session.userId = user._id;
       res.status(201).json(user);
     })
     .then(null, next);
 });
 
 router.post('/signup/entry', function(req, res, next) {
-  console.log('hi: ' + req.body);
+  console.log(req.body);
   User.findOne({email: req.body.email})
     .then(function(user) {
       if (user) {
         res.send('This email is already in use!');
       }
-      else if (user.email && user.password) {
+      else if (req.body.email && req.body.password) {
         var newUser = req.body;
-        User.create(newUser);
-        res.status(201).json(newUser);
+        User.create(newUser).then(function(user){
+        	req.session.userId = user._id;
+       	 	res.status(201).json(newUser);
+        })
       }
     })
     .then(null, next);

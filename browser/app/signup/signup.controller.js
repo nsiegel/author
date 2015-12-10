@@ -1,6 +1,6 @@
 app.controller('signupCtrl', function($scope, authFactory){
-  $scope.login = function(){
-		authFactory.login($scope.user).then(function(credentials){
+  $scope.signup = function(){
+		authFactory.signup($scope.user).then(function(credentials){
 
 		})
 	}
