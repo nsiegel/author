@@ -1,17 +1,28 @@
-app.factory('authFactory', function($http){
+app.factory('authFactory', function($http, $state){
 	var auth = {};
 	var currentUser;
 	auth.signup = function (credentials){
-		$http.post
+		return $http.post('api/users/signup', credentials)
+      .then(function(data) {
+        var user = data.data;
+        currentUser = user;
+        return user;
+      })
 
 	};
 
 	auth.login = function(credentials){
-		return $http.post('auth/login', credentials).then(function(data){
+		return $http.post('/api/users/login', credentials).then(function(data){
 					var user = data.data;
 					currentUser = user;
 					return user;
-		})
+		}).then(function(user) {
+      if (user) {
+        $state.go('users');
+      }
+      // TODO add something if user is not found
+    })
 	};
+
 	return auth;
 })
