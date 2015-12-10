@@ -1,7 +1,3 @@
-app.controller('signupCtrl', function($scope){
-	$scope.user = {};
-	$scope.update = function(user){
-		$scope.user = angular.copy(user);
-		console.log($scope.user);
-	};
+app.controller('signupCtrl', function($scope, authFactory){
+	$scope.signup = authFactory.signup;
 })

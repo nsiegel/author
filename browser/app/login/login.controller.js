@@ -1,7 +1,7 @@
-app.controller('loginCtrl', function($scope){
-	$scope.user = {};
-	$scope.update = function(user){
-		$scope.user = angular.copy(user);
-		console.log($scope.user);
-	};
+app.controller('loginCtrl', function($scope, authFactory){
+	$scope.login = function(){
+		authFactory.login($scope.user).then(function(credentials){
+
+		})
+	}
 })
