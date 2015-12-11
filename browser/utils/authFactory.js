@@ -32,5 +32,9 @@ app.factory('authFactory', function($http, $state){
     })
 	};
 
+  auth.loggedIn = function(user){
+    
+  }
+
 	return auth;
 })
